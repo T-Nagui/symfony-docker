@@ -1,10 +1,11 @@
 
-version: '3.1'
+version: '3.7'
 services:
 
   db:
-    image: mysql:5.7
+    image: mysql:latest
     container_name: app_mysql
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     volumes:
       - .docker/data/db:/var/lib/mysql
@@ -32,7 +33,6 @@ services:
       - maildev_host=app_maildev
     links:
       - db
-      - elk
     depends_on:
       - maildev
       - db
